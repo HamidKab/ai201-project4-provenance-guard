@@ -1,8 +1,8 @@
 ## Detection Signals
 
 `Signal 1` - For one of the signals I would implement a dictionary of words that are uncommon for human usage when writing but common in AI writing. I plan to take the use of these uncommon words and divide them by the total use count of the passage. After a certain threshold it would be more common to be AI. I would probably have to experiment with the threshold to capture AI writing without catching too many human responses on accident. 
-`Signal 2` - The second signal would be a LLM classification signal to label responses based on whether it reads as AI or not.
- `Cofidence Score` - I would combine taking the label and the score from the first label to create a confidence score
+`Signal 2` - The second signal would be a LLM classification signal to label responses based on whether it reads as AI or not. We can use an AI probability score. ex:ai_probability: 0.8
+ `Cofidence Score` - I would combine taking the label and the score from the first label to create a confidence score. Normalize the uncommon-word signal, Convert the LLM result to a score Then combine them
 
 ## Uncertainty Representation
 A confidence score of .6 percent is not high enough for me to label it most likely AI I would most likely label it as uncertain. To get the scores themselves I would take the uncommon word (UCW) percentage and match it with its corresponding label given by the LLM. If something has a high UCW% but is labelled as human text I would give it a confidence score leaning toward it being a human because it is possible for a human to write a text that use a high percent of uncommon words. If something has a low UCW% but is labeled as AI text I would lean it towards being AI because it is common for people to edit generated responses with words that seem more natural
