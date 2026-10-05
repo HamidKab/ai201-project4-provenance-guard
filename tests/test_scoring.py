@@ -1,6 +1,6 @@
 import unittest
 
-from scoring import confidence_score, label_for
+from scoring import confidence_score, label_for, reader_label
 
 
 def ucw(percent):
@@ -57,6 +57,20 @@ class TestLabelFor(unittest.TestCase):
         self.assertEqual(label_for(0.69), "Uncertain")
         self.assertEqual(label_for(0.35), "Likely Human")
         self.assertEqual(label_for(0.36), "Uncertain")
+
+
+class TestReaderLabel(unittest.TestCase):
+    def test_plain_language_for_each_label(self):
+        self.assertEqual(reader_label(0.95)["headline"], "This content was very likely created with AI")
+        self.assertEqual(reader_label(0.72)["headline"], "This content was likely created with AI")
+        self.assertEqual(reader_label(0.05)["headline"], "This content was very likely written by a person")
+        self.assertEqual(reader_label(0.5)["confidence_level"], "Low")
+        self.assertEqual(reader_label(0.72)["confidence_level"], "Moderate")
+
+    def test_never_shows_raw_numbers(self):
+        for score in (0.0, 0.3, 0.5, 0.72, 1.0):
+            text = " ".join(str(v) for v in reader_label(score).values())
+            self.assertFalse(any(ch.isdigit() for ch in text), text)
 
 
 if __name__ == "__main__":

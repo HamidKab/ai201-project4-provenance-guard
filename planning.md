@@ -63,6 +63,6 @@ flowchart TD
 `M3` - For milestone 3 I plan to provide my detection signals as well as the workflow diagram so that claude has an idea of what the overall project will look like.
 After that I'll ask it to implement the submission endpoint and the UCW% signal. For each signal I will ask it to create some test
 
-`M4` - For milestone 4 I plan to feed claude the design forthe uncertainity representation as well as the second signal, the LLM detection, from there I will ask it to come up with different ways to combine the different signals to produce a confidence score. I will go through its response and pick the best option.
+`M4` - For milestone 4 I plan to feed claude the design for the uncertainity representation as well as the second signal, the LLM detection, from there I will ask it to come up with different ways to combine the different signals to produce a confidence score. I will go through its response and pick the best option.
 
 `M5` - For milestone 5 I will give claude my label variants, and appeals workflow and ask it to build out the final piece of the workflow as well as the UI.

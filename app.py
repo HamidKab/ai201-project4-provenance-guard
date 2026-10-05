@@ -6,7 +6,7 @@ from flask import Flask, jsonify, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
-from scoring import confidence_score, label_for
+from scoring import confidence_score, label_for, reader_label
 from signals.llm_classifier import llm_signal
 from signals.uncommon_words import ucw_signal
 from submission_log import read_entries, write_entry
@@ -59,6 +59,7 @@ def submit():
         "creator_id": creator_id,
         "label": label,
         "confidence": confidence,
+        "reader_label": reader_label(confidence),
         "signals": {"ucw": ucw, "llm": llm},
     }), 200
 
